@@ -35,7 +35,7 @@ export default {
   data(){
     return {
       
-      url:'https://api.themoviedb.org/3/search/movie?api_key=a10bb2f450a66787dd09fbc8afd56539&language=it-IT&page=1&include_adult=false&query=?',
+      url:'https://api.themoviedb.org/3/search/movie?api_key=a10bb2f450a66787dd09fbc8afd56539&language=it-IT&page=1&include_adult=false&query=',
       searchText: '',
       movies: null,
       error: null  
@@ -47,11 +47,16 @@ export default {
       console.log(this.searchText);
     }, */
     callApi(){
-      axios.get(this.url).then(response => {
-        console.log(this);
-        console.log(response);
-        this.movies = response.data.results
-        this.url += this.searchText
+      axios
+        // richiesta
+        .get(this.url + this.searchText)
+      
+        // risposta
+        .then(response => {
+          console.log(this);
+          console.log(response);
+          this.movies = response.data.results
+          this.searchText = '';
       })
       .catch(error => {
         console.log(error);
