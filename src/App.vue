@@ -7,6 +7,15 @@
         <button @click.prevent="searchMovie" class="mx-3 p-1">Cerca</button>
       </form>
 
+      <div class="list">
+        <ul v-for="movie in movies" :key="movie.id">
+          <li class="title">{{movie.title}}</li>
+          <li class="original_title">{{movie.original_title}}</li>
+          <li class="language">{{movie.original_language}}</li>
+          <li class="vote">{{movie.vote_average}}</li>
+        </ul>
+      </div>
+
     </div>
     <!-- /.container -->
    
@@ -27,7 +36,6 @@ export default {
     return {
       url:'https://api.themoviedb.org/3/search/movie?api_key=a10bb2f450a66787dd09fbc8afd56539&language=it-IT&page=1&include_adult=false&query=matrix',
       movies: null,
-      loading: true,
       error: null,
       searchText: ''
 
@@ -43,7 +51,7 @@ export default {
         console.log(this);
         console.log(response);
 
-        this.movies = response.data.response
+        this.movies = response.data.results
       })
       .catch(error => {
         console.log(error);
