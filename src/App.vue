@@ -4,7 +4,7 @@
     <div class="container mt-5">
       <form class="d-flex justify-content-center align-items-center" action="">
         <input type="text" v-model="searchText" >
-        <button @click.prevent="searchMovie" class="mx-3 p-1">Cerca</button>
+        <button @click.prevent="callApi" class="mx-3 p-1">Cerca</button>
       </form>
 
       <div class="list">
@@ -14,7 +14,7 @@
           <li class="language">{{movie.original_language}}</li>
           <li class="vote">{{movie.vote_average}}</li>
         </ul>
-      </div>
+      </div> 
 
     </div>
     <!-- /.container -->
@@ -34,24 +34,24 @@ export default {
   },
   data(){
     return {
-      url:'https://api.themoviedb.org/3/search/movie?api_key=a10bb2f450a66787dd09fbc8afd56539&language=it-IT&page=1&include_adult=false&query=matrix',
+      
+      url:'https://api.themoviedb.org/3/search/movie?api_key=a10bb2f450a66787dd09fbc8afd56539&language=it-IT&page=1&include_adult=false&query=?',
+      searchText: '',
       movies: null,
-      error: null,
-      searchText: ''
-
+      error: null  
     };
   },
   methods:{
-    searchMovie(){
-      /* console.log('Searching...'); */
+    /* searchMovie(){
+      console.log('Searching...'); 
       console.log(this.searchText);
-    },
+    }, */
     callApi(){
       axios.get(this.url).then(response => {
         console.log(this);
         console.log(response);
-
         this.movies = response.data.results
+        this.url += this.searchText
       })
       .catch(error => {
         console.log(error);
