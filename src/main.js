@@ -5,6 +5,10 @@ import App from './App.vue'
 const bootstrap = require('bootstrap')
 Vue.use(bootstrap)
 
+/* vue-flag-icon */
+import FlagIcon from 'vue-flag-icon'
+Vue.use(FlagIcon);
+
 Vue.config.productionTip = false
 
 new Vue({
