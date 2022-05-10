@@ -15,7 +15,7 @@
           <li class="title">{{movie.title}}</li>
           <li class="original_title">{{movie.original_title}}</li>
           <li>{{movie.original_language}} <flag :iso = "countryFilter(movie.original_language)"></flag></li>
-          <li class="vote">{{Math.round((movie.vote_average) / 2)}} <font-awesome-icon icon="fa-solid fa-star" /></li>
+          <li class="vote">{{Math.round((movie.vote_average) / 2)}} <font-awesome-icon class="vote_star" icon="fa-solid fa-star" /></li>
         </ul>
       </div> 
 
@@ -27,7 +27,13 @@
           <li class="title">{{serie.name}}</li>
           <li class="original_title">{{serie.original_name}}</li>
           <li>{{serie.original_language}} <flag :iso = "countryFilter(serie.original_language)"></flag></li>
-          <li class="vote">{{Math.round((serie.vote_average) / 2)}}</li>
+          <li class="vote">{{Math.round((serie.vote_average) / 2)}}
+            <font-awesome-icon icon="fa-solid fa-star" v-if = "Math.round((serie.vote_average) / 2) >= 1"/>
+            <font-awesome-icon icon="fa-solid fa-star" v-if = "Math.round((serie.vote_average) / 2) >= 2"/>
+            <font-awesome-icon icon="fa-solid fa-star" v-if = "Math.round((serie.vote_average) / 2) >= 3"/>
+            <font-awesome-icon icon="fa-solid fa-star" v-if = "Math.round((serie.vote_average) / 2) >= 4"/>
+            <font-awesome-icon icon="fa-solid fa-star" v-if = "Math.round((serie.vote_average) / 2) >= 5"/>
+          </li>
         </ul>
       </div> 
 
@@ -136,6 +142,10 @@ export default {
     font-size: 2rem;
     font-weight: bold;
 
+  }
+
+  .vote_star{
+    color: yellow;
   }
 
 </style>
