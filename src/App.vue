@@ -38,6 +38,10 @@
 
             <font-awesome-icon icon="fa-solid fa-star" :class= "Math.round((serie.vote_average) / 2) >= 5 ? 'd-block' : 'd-none'"/> -->
 
+            <font-awesome-icon icon="fa-solid faStarBlack" />
+            <font-awesome-icon icon="fa-regular faStarNoBlack" />
+            
+
 
 
 
