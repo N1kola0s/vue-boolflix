@@ -6,16 +6,20 @@ import App from './App.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 /* import specific icons 👇 QUI AGGIUNGI LE ICONE che vuoi usare in camelCase */
-import { faStar } from '@fortawesome/free-solid-svg-icons'
+
+/* import { faStar } from '@fortawesome/free-solid-svg-icons' */
 /* import { faStar } from '@fortawesome/free-regular-svg-icons' */
-/* import { faStar as faStarBlack } from '@fortawesome/free-solid-svg-icons'
-import { faStar as faStarNoBlack } from '@fortawesome/free-regular-svg-icons' */
+
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
+
+/* add icons to the library 👇 QUI AGGIUNGI IL NOME DELL'ICONA in camelCase*/
+/* library.add(faStar, farStar) */
+
+library.add(faStar, farStar);
 
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-/* add icons to the library 👇 QUI AGGIUNGI IL NOME DELL'ICONA in camelCase*/
-library.add(faStar)
 
 /* add font awesome icon component */
 Vue.component('font-awesome-icon', FontAwesomeIcon)
