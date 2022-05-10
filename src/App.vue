@@ -22,6 +22,8 @@
         <!-- serieTv -->
        <div class="list">
         <ul v-for="serie in series" :key="serie.id">
+          <li v-if="serie.poster_path!= null"><img :src=" 'https://image.tmdb.org/t/p/w500/' + serie.poster_path" alt="poster film"></li>
+          <li class="no_image" v-else>NO COVER IMAGE</li>
           <li class="title">{{serie.name}}</li>
           <li class="original_title">{{serie.original_name}}</li>
           <li>{{serie.original_language}} <flag :iso = "countryFilter(serie.original_language)"></flag></li>
