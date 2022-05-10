@@ -11,7 +11,7 @@
       <div class="list">
         <ul v-for="movie in movies" :key="movie.id">
           <li v-if="movie.poster_path!= null"><img :src=" 'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="poster film"></li>
-          <li class="no_image" v-else>NO COVER IMAGE</li>
+          <li class="no_image" v-else>IMAGE NOT FOUND</li>
           <li class="title">{{movie.title}}</li>
           <li class="original_title">{{movie.original_title}}</li>
           <li>{{movie.original_language}} <flag :iso = "countryFilter(movie.original_language)"></flag></li>
@@ -23,7 +23,7 @@
        <div class="list">
         <ul v-for="serie in series" :key="serie.id">
           <li v-if="serie.poster_path!= null"><img :src=" 'https://image.tmdb.org/t/p/w500/' + serie.poster_path" alt="poster film"></li>
-          <li class="no_image" v-else>NO COVER IMAGE</li>
+          <li class="no_image" v-else>IMAGE NOT FOUND</li>
           <li class="title">{{serie.name}}</li>
           <li class="original_title">{{serie.original_name}}</li>
           <li>{{serie.original_language}} <flag :iso = "countryFilter(serie.original_language)"></flag></li>
