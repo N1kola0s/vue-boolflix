@@ -15,19 +15,19 @@
           <li class="title">{{movie.title}}</li>
           <li class="original_title">{{movie.original_title}}</li>
           <li>{{movie.original_language}} <flag :iso = "countryFilter(movie.original_language)"></flag></li>
-          <li class="vote">{{movie.vote_average}}</li>
+          <li class="vote">{{Math.round((movie.vote_average) / 2)}}</li>
         </ul>
       </div> 
 
         <!-- serieTv -->
-       <div class="list">
+       <div class="list"></div>
         <ul v-for="serie in series" :key="serie.id">
           <li v-if="serie.poster_path!= null"><img :src=" 'https://image.tmdb.org/t/p/w500/' + serie.poster_path" alt="poster film"></li>
           <li class="no_image" v-else>IMAGE NOT FOUND</li>
           <li class="title">{{serie.name}}</li>
           <li class="original_title">{{serie.original_name}}</li>
           <li>{{serie.original_language}} <flag :iso = "countryFilter(serie.original_language)"></flag></li>
-          <li class="vote">{{serie.vote_average}}</li>
+          <li class="vote">{{Math.round((serie.vote_average) / 2)}}</li>
         </ul>
       </div> 
 
@@ -136,6 +136,9 @@ export default {
     align-items: center;
     height:498px;
     width: 500px;
+    font-size: 2rem;
+    font-weight: bold;
+
   }
 
 </style>
