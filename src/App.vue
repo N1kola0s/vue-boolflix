@@ -15,7 +15,7 @@
           <li class="title">{{movie.title}}</li>
           <li class="original_title">{{movie.original_title}}</li>
           <li>{{movie.original_language}} <flag :iso = "countryFilter(movie.original_language)"></flag></li>
-          <li class="vote">{{Math.round((movie.vote_average) / 2)}}</li>
+          <li class="vote">{{Math.round((movie.vote_average) / 2)}} <font-awesome-icon icon="fa-solid fa-star" /></li>
         </ul>
       </div> 
 
@@ -76,9 +76,6 @@ export default {
           console.log(response);
           this.movies = response.data.results
           this.searchText = '';
-         /*  this.urlImg = response.data.results.poster_path
-          console.log(response.data.results[response.data.movies.id].poster_path); */
-          /* "movies.0.id" */
       })
       .catch(error => {
         console.log(error);
