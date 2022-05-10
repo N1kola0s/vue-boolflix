@@ -7,7 +7,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 
 /* import specific icons 👇 QUI AGGIUNGI LE ICONE che vuoi usare in camelCase */
 import { faStar } from '@fortawesome/free-solid-svg-icons'
-/* import { faStar } from '@fortawesome/free-regular-svg-icons' */
+import { faStar } from '@fortawesome/free-regular-svg-icons'
 
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

@@ -28,11 +28,13 @@
           <li class="original_title">{{serie.original_name}}</li>
           <li>{{serie.original_language}} <flag :iso = "countryFilter(serie.original_language)"></flag></li>
           <li class="vote">{{Math.round((serie.vote_average) / 2)}}
-            <font-awesome-icon icon="fa-solid fa-star" v-if = "Math.round((serie.vote_average) / 2) >= 1"/>
-            <font-awesome-icon icon="fa-solid fa-star" v-if = "Math.round((serie.vote_average) / 2) >= 2"/>
-            <font-awesome-icon icon="fa-solid fa-star" v-if = "Math.round((serie.vote_average) / 2) >= 3"/>
-            <font-awesome-icon icon="fa-solid fa-star" v-if = "Math.round((serie.vote_average) / 2) >= 4"/>
-            <font-awesome-icon icon="fa-solid fa-star" v-if = "Math.round((serie.vote_average) / 2) >= 5"/>
+           <!--  <font-awesome-icon icon="fa-solid fa-star" :class= "Math.round((serie.vote_average) / 2) >= 1"/>
+            <font-awesome-icon icon="fa-solid fa-star" v-if = "(Math.round((serie.vote_average) / 2) >= 2)"/>
+            <font-awesome-icon icon="fa-solid fa-star" v-if = "(Math.round((serie.vote_average) / 2) >= 3)"/>
+            <font-awesome-icon icon="fa-solid fa-star" v-if = "(Math.round((serie.vote_average) / 2) >= 4)"/>
+            <font-awesome-icon icon="fa-solid fa-star" v-if = "(Math.round((serie.vote_average) / 2) >= 5)"/> -->
+
+            
           </li>
         </ul>
       </div> 
