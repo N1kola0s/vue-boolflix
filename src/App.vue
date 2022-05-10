@@ -10,7 +10,8 @@
       <!-- film -->
       <div class="list">
         <ul v-for="movie in movies" :key="movie.id">
-          <li><img :src=" 'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path" alt="poster film"></li>
+          <li v-if="movie.poster_path!= null"><img :src=" 'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="poster film"></li>
+          <li class="no_image" v-else>NO COVER IMAGE</li>
           <li class="title">{{movie.title}}</li>
           <li class="original_title">{{movie.original_title}}</li>
           <li>{{movie.original_language}} <flag :iso = "countryFilter(movie.original_language)"></flag></li>
@@ -49,6 +50,7 @@ export default {
       
       urlFilm:'https://api.themoviedb.org/3/search/movie?api_key=a10bb2f450a66787dd09fbc8afd56539&language=it-IT&page=1&include_adult=false&query=?',
       urlTv:'https://api.themoviedb.org/3/search/tv?api_key=a10bb2f450a66787dd09fbc8afd56539&language=it-IT&page=1&include_adult=false&query=?',
+      urlImg:'',
       searchText: '',
       movies: null,
       series:null,
@@ -72,6 +74,9 @@ export default {
           console.log(response);
           this.movies = response.data.results
           this.searchText = '';
+         /*  this.urlImg = response.data.results.poster_path
+          console.log(response.data.results[response.data.movies.id].poster_path); */
+          /* "movies.0.id" */
       })
       .catch(error => {
         console.log(error);
@@ -117,5 +122,18 @@ export default {
     background-color: aquamarine;
     height: 100px;
 
+      
   }
+
+  .no_image{
+
+    background-color: black;
+    color:white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:498px;
+    width: 500px;
+  }
+
 </style>
