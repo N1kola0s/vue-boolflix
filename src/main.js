@@ -10,13 +10,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 /* import { faStar } from '@fortawesome/free-solid-svg-icons' */
 /* import { faStar } from '@fortawesome/free-regular-svg-icons' */
 
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 
 /* add icons to the library 👇 QUI AGGIUNGI IL NOME DELL'ICONA in camelCase*/
 /* library.add(faStar, farStar) */
 
-library.add(faStar, farStar);
+library.add(faStar, farStar, faMagnifyingGlass);
 
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

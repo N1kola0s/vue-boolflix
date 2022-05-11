@@ -1,14 +1,84 @@
 <template>
   <div id="app">
+
+    <header id="site_header">
+      <nav class="d-flex align-items-center justify-content-between h-100">
+        <div class="logo">
+          <img src="./assets/logo_nettflaex.png" alt="logo_nettflaex">
+        </div>
+        <!-- /.logo -->
+
+        <form class="d-flex justify-content-center align-items-center h-25">
+          <input type="text" v-model="searchText" class="d-flex align-items-center border-0 px-2" >
+          <button @click.prevent="callApi" class=" mx-1 h-75 d-flex align-items-center justify-content-center text-white">
+          <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="px-2" /> 
+          </button>
+        </form>
+      </nav>
+    </header>
+    <!-- /#site_header -->
+
+    <main id="site_header">
+      <div class="container">
+        <div class="row row-cols-4">
+          <div class="col" v-for="movie in movies" :key="movie.id">
+
+            <div class="card">
+              <img class="card-img-top" v-if="movie.poster_path!= null" :src=" 'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="poster film">
+              <img class="card-img-top" src="https://picsum.photos/id/209/342/500" v-else>
+              <div class="card-body">
+                <h5 class="card-title">{{movie.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted original_title">{{movie.original_title}}</h6>
+                <p class="card-text">
+                  {{movie.original_language}} <flag :iso = "countryFilter(movie.original_language)"></flag> <br>
+                  {{Math.round((movie.vote_average) / 2)}} 
+                  <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 1" />
+                  <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 2" />
+                  <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 3" />
+                  <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 4" />
+                  <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 5" />
+                </p>
+                <!-- /.card-text -->
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- .card -->
+          </div>
+          <!-- /.col -->
+
+          <div class="col" v-for="serie in series" :key="serie.id">
+            <div class="card">
+              <img class="card-img-top" v-if="serie.poster_path!= null" :src=" 'https://image.tmdb.org/t/p/w342/' + serie.poster_path" alt="poster film">
+              <img class="card-img-top" src="https://picsum.photos/id/209/342/500" v-else>
+              <div class="card-body">
+                <h5 class="card-title">{{serie.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted original_title">{{serie.original_name}}</h6>
+                <p class="card-text">
+                  {{serie.original_language}} <flag :iso = "countryFilter(serie.original_language)"></flag> <br>
+                  {{Math.round((serie.vote_average) / 2)}} 
+                  <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 1" />
+                  <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 2" />
+                  <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 3" />
+                  <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 4" />
+                  <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 5" />
+                </p>
+                <!-- /.card-text -->
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- .card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </main>
+    <!-- /#site_header -->
     
-    <div class="container mt-5">
-      <form class="d-flex justify-content-center align-items-center" action="">
-        <input type="text" v-model="searchText" >
-        <button @click.prevent="callApi" class="mx-3 p-1">Cerca</button>
-      </form>
 
       <!-- film -->
-      <div class="list">
+      <!-- <div class="list">
         <ul v-for="movie in movies" :key="movie.id">
           <li v-if="movie.poster_path!= null"><img :src=" 'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="poster film"></li>
           <li class="no_image" v-else>IMAGE NOT FOUND</li>
@@ -24,10 +94,10 @@
             <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 5" />
           </li>
         </ul>
-      </div> 
+      </div>  -->
 
         <!-- serieTv -->
-       <div class="list">
+      <!--  <div class="list">
         <ul v-for="serie in series" :key="serie.id">
           <li v-if="serie.poster_path!= null"><img :src=" 'https://image.tmdb.org/t/p/w500/' + serie.poster_path" alt="poster film"></li>
           <li class="no_image" v-else>IMAGE NOT FOUND</li>
@@ -44,19 +114,18 @@
 
           </li>
         </ul>
-      </div> 
+      </div>  -->
 
-    </div>
-    <!-- /.container -->
+    
    
 
   </div>
+  <!-- /#app -->
 </template>
 
 <script>
 //importo axios nel tag script 
 import axios from "axios"; 
-
 export default {
   name: 'App',
   components: {
@@ -118,7 +187,6 @@ export default {
       } else {
         return flagLanguage
       }
-
     }
   },
   mounted(){
@@ -130,31 +198,62 @@ export default {
 <style lang="scss">
 /* importo lo stile */
   @import '@/assets/scss/style.scss';
-  
-  
-  form{
-    background-color: aquamarine;
-    height: 100px;
 
-      
+  header{
+    height:70px;
+    background-color: #1B1B1B;
+    
+    nav{
+      .logo{
+        height: 36px;
+        display:flex;
+        margin: 0 1rem;
+      }
+
+      form{
+        margin: 0 1rem;
+
+        button {
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+        background: none;
+        }
+      }
+    }
   }
 
-  .no_image{
+  main{
+    min-height: calc(100vh - 70px);
 
-    background-color: black;
-    color:white;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    height:498px;
-    width: 500px;
-    font-size: 2rem;
-    font-weight: bold;
+    .container{
+      .row{
+        .col{
+          .card{
+            .card-img-top{
+              width: 342px;
+              height: 500px;
 
-  }
+            }
 
-  .vote_star{
+            .card-body{
+              width: 342px;
+              height: 500px;
+            }
+          }
+        }
+      }
+    }
+
+    .vote_star{
     color: yellow;
+    }
   }
-
+  
+  
+  
+  
 </style>
