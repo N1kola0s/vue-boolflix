@@ -82,50 +82,6 @@
       <!-- /.container -->
     </main>
     <!-- /#site_header -->
-    
-
-      <!-- film -->
-      <!-- <div class="list">
-        <ul v-for="movie in movies" :key="movie.id">
-          <li v-if="movie.poster_path!= null"><img :src=" 'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="poster film"></li>
-          <li class="no_image" v-else>IMAGE NOT FOUND</li>
-          <li class="title">{{movie.title}}</li>
-          <li class="original_title">{{movie.original_title}}</li>
-          <li>{{movie.original_language}} <flag :iso = "countryFilter(movie.original_language)"></flag></li>
-          <li class="vote">{{Math.round((movie.vote_average) / 2)}} 
-
-            <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 1" />
-            <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 2" />
-            <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 3" />
-            <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 4" />
-            <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 5" />
-          </li>
-        </ul>
-      </div>  -->
-
-        <!-- serieTv -->
-      <!--  <div class="list">
-        <ul v-for="serie in series" :key="serie.id">
-          <li v-if="serie.poster_path!= null"><img :src=" 'https://image.tmdb.org/t/p/w500/' + serie.poster_path" alt="poster film"></li>
-          <li class="no_image" v-else>IMAGE NOT FOUND</li>
-          <li class="title">{{serie.name}}</li>
-          <li class="original_title">{{serie.original_name}}</li>
-          <li>{{serie.original_language}} <flag :iso = "countryFilter(serie.original_language)"></flag></li>
-          <li class="vote">{{Math.round((serie.vote_average) / 2)}}
-
-            <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 1" />
-            <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 2" />
-            <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 3" />
-            <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 4" />
-            <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 5" />
-
-          </li>
-        </ul>
-      </div>  -->
-
-    
-   
-
   </div>
   <!-- /#app -->
 </template>
