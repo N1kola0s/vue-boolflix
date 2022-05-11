@@ -19,19 +19,22 @@
     <!-- /#site_header -->
 
     <main id="site_header">
-      <div class="container">
-        <div class="row row-cols-6">
-          <div class="col" v-for="movie in movies" :key="movie.id">
+      <div class="container my-5">
+        <div class="row row-cols-6 g-3">
+          <div class="col gap-3" v-for="movie in movies" :key="movie.id">
 
             <div class="card">
-              <img class="card-img-top" v-if="movie.poster_path!= null" :src=" 'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="poster film">
-              <img class="card-img-top" src="https://picsum.photos/id/209/342/500" v-else>
+              
+                <img class="card-img-top" v-if="movie.poster_path!= null" :src=" 'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="poster film">
+                <img class="card-img-top" src="https://picsum.photos/id/209/342/500" v-else>
+              
+      
               <div class="card-body w-100">
                 <h5 class="card-title">{{movie.title}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted original_title">{{movie.original_title}}</h6>
                 <p class="card-text">
-                  {{movie.original_language}} <flag :iso = "countryFilter(movie.original_language)"></flag> <br>
-                  {{Math.round((movie.vote_average) / 2)}} 
+                  Lingua: <!-- {{movie.original_language}} --> <flag :iso = "countryFilter(movie.original_language)"></flag> <br>
+                  Voto: {{Math.round((movie.vote_average) / 2)}}/5
                   <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 1" />
                   <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 2" />
                   <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 3" />
@@ -48,14 +51,18 @@
 
           <div class="col" v-for="serie in series" :key="serie.id">
             <div class="card">
-              <img class="card-img-top" v-if="serie.poster_path!= null" :src=" 'https://image.tmdb.org/t/p/w342/' + serie.poster_path" alt="poster film">
-              <img class="card-img-top" src="https://picsum.photos/id/209/342/500" v-else>
+              
+                <img class="card-img-top" v-if="serie.poster_path!= null" :src=" 'https://image.tmdb.org/t/p/w342/' + serie.poster_path" alt="poster film">
+                <img class="card-img-top" src="https://picsum.photos/id/209/342/500" v-else>
+            
+
+              
               <div class="card-body w-100">
                 <h5 class="card-title">{{serie.name}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted original_title">{{serie.original_name}}</h6>
                 <p class="card-text">
-                  {{serie.original_language}} <flag :iso = "countryFilter(serie.original_language)"></flag> <br>
-                  {{Math.round((serie.vote_average) / 2)}} 
+                  Lingua: <!-- {{serie.original_language}} --> <flag :iso = "countryFilter(serie.original_language)"></flag> <br>
+                  Voto: {{Math.round((serie.vote_average) / 2)}}/5
                   <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 1" />
                   <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 2" />
                   <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 3" />
@@ -141,6 +148,7 @@ export default {
       movies: null,
       series:null,
       error: null,
+      activeHover:null
       
     };
   },
@@ -187,7 +195,7 @@ export default {
       } else {
         return flagLanguage
       }
-    }
+    },
   },
   mounted(){
             this.callApi(); 
@@ -236,21 +244,34 @@ export default {
             .card-img-top{
               /* width: 342px; */
               height: 298px;
-
             }
 
             .card-body{
               /* width: 342px; */
+              display:none;
               height: 298px;
+              background-color:black;
+              color:white;
+                .vote_star{
+                color: yellow;
+                }
             }
+
+            
           }
+
+          .card:hover .card-img-top{
+              display:none;
+            }
+
+          .card:hover .card-body{
+              display:block;
+            }
         }
       }
     } 
 
-    .vote_star{
-    color: yellow;
-    }
+    
   }
   
   
