@@ -20,13 +20,13 @@
 
     <main id="site_header">
       <div class="container">
-        <div class="row row-cols-4">
+        <div class="row row-cols-6">
           <div class="col" v-for="movie in movies" :key="movie.id">
 
             <div class="card">
               <img class="card-img-top" v-if="movie.poster_path!= null" :src=" 'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="poster film">
               <img class="card-img-top" src="https://picsum.photos/id/209/342/500" v-else>
-              <div class="card-body">
+              <div class="card-body w-100">
                 <h5 class="card-title">{{movie.title}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted original_title">{{movie.original_title}}</h6>
                 <p class="card-text">
@@ -50,7 +50,7 @@
             <div class="card">
               <img class="card-img-top" v-if="serie.poster_path!= null" :src=" 'https://image.tmdb.org/t/p/w342/' + serie.poster_path" alt="poster film">
               <img class="card-img-top" src="https://picsum.photos/id/209/342/500" v-else>
-              <div class="card-body">
+              <div class="card-body w-100">
                 <h5 class="card-title">{{serie.name}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted original_title">{{serie.original_name}}</h6>
                 <p class="card-text">
@@ -234,19 +234,19 @@ export default {
         .col{
           .card{
             .card-img-top{
-              width: 342px;
-              height: 500px;
+              /* width: 342px; */
+              height: 298px;
 
             }
 
             .card-body{
-              width: 342px;
-              height: 500px;
+              /* width: 342px; */
+              height: 298px;
             }
           }
         }
       }
-    }
+    } 
 
     .vote_star{
     color: yellow;
