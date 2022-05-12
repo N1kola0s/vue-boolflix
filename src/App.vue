@@ -134,8 +134,7 @@ export default {
       searchText: '',
       movies: null,
       series:null,
-      error: null,
-      activeHover:null
+      error: null
       
     };
   },
