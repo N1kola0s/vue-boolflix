@@ -32,7 +32,11 @@
             <div class="card border-0">
                 <!-- imposto una condizione affinchè venga mostrata un'immagine solo nel caso sia presente come valore nel percorso indicato nella richiesta al server altrimenti verrà restituita un'immagine segnaposto generata con il servizio di picsum -->
                 <img class="card-img-top" v-if="movie.poster_path!= null" :src=" 'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="poster film">
-                <img class="card-img-top" src="https://picsum.photos/id/209/342/500" v-else>
+                <div class="img_not_found" v-else>
+                  <img class="card-img-top" src="https://picsum.photos/id/209/342/500" >
+                  <div class="txt_not_found text-uppercase text-white">image not found</div>
+                </div>
+                
               
       
               <div class="card-body w-100">
@@ -44,13 +48,19 @@
                   <div class="info my-3">
                     <!-- interpolazione del valore contenuto nella proprietà vote_average dell'elemento. Considerato che questa viene resitutita con scala 1:10 dopo aver arrotondato con il metodo il valore lo divido per 2 per ottenere un valore su scala 1:5 -->
                     Lingua: <!-- {{movie.original_language}} --> <flag :iso = "countryFilter(movie.original_language)"></flag> <br>
-                    Voto: {{Math.round((movie.vote_average) / 2)}}/5
+                    Voto: <!-- {{Math.round((movie.vote_average) / 2)}}/5 -->
                     <!-- dopo aver importato con il servizio di fontawesome le icone stars, imposto una condizione in modo che vengano mostrate su schermo al verificarsi di un operatore matematico legato al valore di vote_average presente nell'elemento movie -->
-                    <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 1" />
-                    <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 2" />
-                    <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 3" />
-                    <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 4" />
-                    <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 5" />
+                    <font-awesome-icon class="star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 1" />
+                    <font-awesome-icon class="star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 2" />
+                    <font-awesome-icon class="star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 3" />
+                    <font-awesome-icon class="star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 4" />
+                    <font-awesome-icon class="star" :icon="['fas', 'star']" v-show="Math.round((movie.vote_average) / 2)>= 5" />
+                    <font-awesome-icon class="star" :icon="['far', 'star']" v-show="Math.round((movie.vote_average) / 2)< 1" />
+                    <font-awesome-icon class="star" :icon="['far', 'star']" v-show="Math.round((movie.vote_average) / 2)< 2" />
+                    <font-awesome-icon class="star" :icon="['far', 'star']" v-show="Math.round((movie.vote_average) / 2)< 3" />
+                    <font-awesome-icon class="star" :icon="['far', 'star']" v-show="Math.round((movie.vote_average) / 2)< 4" />
+                    <font-awesome-icon class="star" :icon="['far', 'star']" v-show="Math.round((movie.vote_average) / 2)< 5" />
+
                   </div>
                   <!-- /.info -->
                   <!-- imposto la condizione che l'overview venga mostrata su schermo soltanto quando sia presente nell'elemento -->
@@ -73,7 +83,10 @@
             <div class="card border-0">
               
                 <img class="card-img-top" v-if="serie.poster_path!= null" :src=" 'https://image.tmdb.org/t/p/w342/' + serie.poster_path" alt="poster film">
-                <img class="card-img-top" src="https://picsum.photos/id/209/342/500" v-else>
+                <div class="img_not_found" v-else>
+                  <img class="card-img-top" src="https://picsum.photos/id/209/342/500" >
+                  <div class="txt_not_found text-uppercase text-white">image not found</div>
+                </div>
             
 
               
@@ -83,12 +96,17 @@
                 <div class="card-text">
                   <div class="info my-3">
                     Lingua: <!-- {{serie.original_language}} --> <flag :iso = "countryFilter(serie.original_language)"></flag> <br>
-                    Voto: {{Math.round((serie.vote_average) / 2)}}/5
-                    <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 1" />
-                    <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 2" />
-                    <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 3" />
-                    <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 4" />
-                    <font-awesome-icon class="vote_star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 5" />
+                    Voto: <!-- {{Math.round((serie.vote_average) / 2)}}/5 -->
+                    <font-awesome-icon class="star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 1" />
+                    <font-awesome-icon class="star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 2" />
+                    <font-awesome-icon class="star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 3" />
+                    <font-awesome-icon class="star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 4" />
+                    <font-awesome-icon class="star" :icon="['fas', 'star']" v-show="Math.round((serie.vote_average) / 2)>= 5" />
+                    <font-awesome-icon class="star" :icon="['far', 'star']" v-show="Math.round((serie.vote_average) / 2)< 1" />
+                    <font-awesome-icon class="star" :icon="['far', 'star']" v-show="Math.round((serie.vote_average) / 2)< 2" />
+                    <font-awesome-icon class="star" :icon="['far', 'star']" v-show="Math.round((serie.vote_average) / 2)< 3" />
+                    <font-awesome-icon class="star" :icon="['far', 'star']" v-show="Math.round((serie.vote_average) / 2)< 4" />
+                    <font-awesome-icon class="star" :icon="['far', 'star']" v-show="Math.round((serie.vote_average) / 2)< 5" />
                   </div>
                   <!-- /.info -->
                   <div class="overview" v-show="serie.overview!=''">
@@ -186,7 +204,7 @@ export default {
       } else {
         return flagLanguage
       }
-    },
+    }
   },
   /* richiamo la chiamata api in mounted in modo che rimanga nella cache */
   mounted(){
@@ -244,6 +262,8 @@ export default {
             position:relative;
             box-shadow: 0 2px 4px 0 rgb(0 0 0 / 50%);
 
+            
+
             .card-img-top{
               /* width: 342px; */
               max-height: 298px;
@@ -287,9 +307,25 @@ export default {
                   font-weight: bold;
                 }
 
-                .vote_star{
+                .star{
                 color: yellow;
-                } 
+                }  
+            }
+
+            .img_not_found{
+              position:relative;
+              
+              .txt_not_found{
+                position:absolute;
+                top:82%;
+                left:50%;
+                transform: translate(-50%, -50%);
+                background-color: #da181ea5;
+                width: 100%;
+                font-weight: bold;
+                padding:8px;
+                text-align: center;
+              }
             }
           }
 
