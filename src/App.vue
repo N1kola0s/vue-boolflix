@@ -242,6 +242,7 @@ export default {
         .col{
           .card{
             position:relative;
+            box-shadow: 0 2px 4px 0 rgb(0 0 0 / 50%);
 
             .card-img-top{
               /* width: 342px; */
