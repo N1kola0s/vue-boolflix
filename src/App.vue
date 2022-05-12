@@ -129,7 +129,7 @@ export default {
       /* faccio lo stesso per le serieTv */
       urlTv:'https://api.themoviedb.org/3/search/tv?api_key=a10bb2f450a66787dd09fbc8afd56539&language=it-IT&page=1&include_adult=false&query=?',
 
-      /* imposto variabili a cui saranno assegnati valori in seguito la chiamata api */
+      /* imposto variabili a cui saranno assegnati valori */
       urlImg:'',
       searchText: '',
       movies: null,
@@ -156,6 +156,7 @@ export default {
 
           //assegno i dati ottenuti in risposta dal server
           this.movies = response.data.results
+          //pulisco il searchText
           this.searchText = '';
       })
       .catch(error => {
