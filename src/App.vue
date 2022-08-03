@@ -2,7 +2,10 @@
   <div id="app">
 
     <header id="site_header">
+
+      <!-- This is NAVBAR -->
       <nav class="d-flex align-items-center justify-content-between h-100">
+
         <div class="logo">
           <img src="./assets/logo_nettflaex.png" alt="logo_nettflaex">
         </div>
@@ -20,11 +23,14 @@
         <!-- /form-->
       </nav>
       <!-- /nav -->
+
     </header>
     <!-- /#site_header -->
 
+
     <main id="site_main">
 
+      <!-- This is HERO -->
       <div class="hero">
 
         <div class="hero_info h-100 pt-4">
@@ -53,9 +59,7 @@
         <!-- <img src="https://user-images.githubusercontent.com/33485020/108069438-5ee79d80-7089-11eb-8264-08fdda7e0d11.jpg" alt="hero_image"> -->
       </div>
 
-
-    <!-- SWIPER carosello -->
- 
+    <!-- This is a SWIPER JS carousel-->
       <div ref="swiper" class="swiper container-fluid mb-4">
 
         <div class="swiper-wrapper">
@@ -89,7 +93,7 @@
       </div>
       <!-- /.swiper container-->
 
-
+    <!-- This is SEARCH RESULTS area  -->
       <div class="container search_results my-5">
         <div class="row row-cols-6 g-3">
           <!-- ciclo all'interno degli elementi dell'array dei film presente sul server e restituitotmi attraverso la chiamata api. Utilizzo il valore dell' id univoco contenuto come valore all'interno della proprieta nell'elemento movie -->
@@ -192,6 +196,7 @@
         <!-- /.row -->
       </div>
       <!-- /.search_results -->
+
     </main>
     <!-- /#site_header -->
   </div>
