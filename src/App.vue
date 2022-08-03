@@ -10,7 +10,7 @@
 
         <form class="d-flex justify-content-center align-items-center h-25">
           <!-- imposto 'searchText' come v-model in modo che al suo interno mi venga resituito il valore inserito dall'utente nella search-box -->
-          <input type="text" v-model="searchText" class="d-flex align-items-center border-0 px-2" >
+          <input type="text" v-model="searchText" placeholder="Cerca..." class="d-flex align-items-center border-0 px-2" >
           <!-- imposto un evento al click con il prevent(in modo che non si refreshi la pagina) in modo che scateni la chiamata api -->
           <button @click.prevent="callApi" class=" mx-1 h-75 d-flex align-items-center justify-content-center text-white">
             <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="px-2" /> 
@@ -24,7 +24,73 @@
     <!-- /#site_header -->
 
     <main id="site_main">
-      <div class="container my-5">
+
+      <div class="hero">
+
+        <div class="hero_info h-100 pt-4">
+
+        <div class="container">
+
+            <img height="150px" class=" py-4 mt-5 hero_film_logo" src="./assets/img/logo_film_hero.png" alt="hero-film-logo">
+            <!-- /.hero_film_logo -->
+         
+          <p class="hero_text">
+            Otto ladri si barricano nell'edificio della Zecca spagnola con alcuni ostaggi, mentre una mente criminale manipola la polizia per mettere in atto il suo piano.
+          </p>
+          <!-- /.hero_text -->
+
+          <div class="cta d-flex">
+            <button type="button" class="btn btn-light btn-lg me-4 mt-2 d-flex align-items-center" href="#"><font-awesome-icon icon="fa-solid fa-play" class="icon_hero_play pe-2" />Riproduci</button>
+            <button type="button" class="btn btn-secondary btn-lg me-4 mt-2 align-items-center" href="#"><font-awesome-icon icon="fa-solid fa-circle-info" class="icon_hero_info pe-2" />Altre info</button>
+          </div>
+        </div>
+
+          
+        </div>
+        <!-- /.hero_info -->
+
+
+        <!-- <img src="https://user-images.githubusercontent.com/33485020/108069438-5ee79d80-7089-11eb-8264-08fdda7e0d11.jpg" alt="hero_image"> -->
+      </div>
+
+
+    <!-- SWIPER carosello -->
+ 
+      <div ref="swiper" class="swiper container-fluid mb-4">
+
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide"
+            v-for="(slide,index) in sliders" :key="index">
+            <div class="slide_image">
+              <img width="398px" height="398px" :src="'https://image.tmdb.org/t/p/w342/' + slide.poster_path" alt="poster film">
+              <font-awesome-icon icon="fa-solid fa-circle-play" class="icon_slide_play"/>
+            </div>
+
+          </div>
+          <!-- /.swiper-slide -->
+
+        </div>
+        <!-- /.swiper-wrapper -->
+
+          <!-- Se hai bisogno della paginazione -->
+          <!-- <div class="swiper-pagination"></div> -->
+
+          <!-- Buttons di navigazione -->
+          <div class="navigator">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+          </div>
+
+          <!-- Se hai bisogno della scrollbar -->
+          <!-- <div class="swiper-scrollbar"></div> -->
+
+      </div>
+      <!-- /.swiper container-->
+
+
+      <div class="container search_results my-5">
         <div class="row row-cols-6 g-3">
           <!-- ciclo all'interno degli elementi dell'array dei film presente sul server e restituitotmi attraverso la chiamata api. Utilizzo il valore dell' id univoco contenuto come valore all'interno della proprieta nell'elemento movie -->
           <div class="col gap-3" v-for="movie in movies" :key="movie.id">
@@ -125,7 +191,7 @@
         </div>
         <!-- /.row -->
       </div>
-      <!-- /.container -->
+      <!-- /.search_results -->
     </main>
     <!-- /#site_header -->
   </div>
@@ -135,6 +201,14 @@
 <script>
 //importo axios nel tag script 
 import axios from "axios"; 
+
+import Swiper, { Navigation, Pagination } from 'swiper';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+
 export default {
   name: 'App',
   components: {
@@ -143,26 +217,32 @@ export default {
   data(){
     return {
       /* imposto variabile con url del server a cui sarà fatta richiesta per ottenere i dati relativi ai film, nell'url è presente api_key ottenuta in seguito alla registrazione del relativo servizio online ma non la query che sarà aggiunta dinamicamente con la chiamata api */
-      urlFilm:'https://api.themoviedb.org/3/search/movie?api_key=a10bb2f450a66787dd09fbc8afd56539&language=it-IT&page=1&include_adult=false&query=?',
+      urlFilm:'https://api.themoviedb.org/3/search/movie?api_key=a10bb2f450a66787dd09fbc8afd56539&language=it-IT&page=1&include_adult=false&query=',
       /* faccio lo stesso per le serieTv */
-      urlTv:'https://api.themoviedb.org/3/search/tv?api_key=a10bb2f450a66787dd09fbc8afd56539&language=it-IT&page=1&include_adult=false&query=?',
+      urlTv:'https://api.themoviedb.org/3/search/tv?api_key=a10bb2f450a66787dd09fbc8afd56539&language=it-IT&page=1&include_adult=false&query=',
 
       /* imposto variabili a cui saranno assegnati valori */
       urlImg:'',
       searchText: '',
       movies: null,
       series:null,
-      error: null
-      
-    };
+      error: null,
+      sliders:null,
+      activeImage:0
+
+      /* chiusura */
+    }
   },
   methods:{
+    
+   
     //imposto un metodo per le chiamate api
     callApi(){
 
       //imposto chiamata axios per i film
       axios
         // richiesta
+        /* this.urlFilm + this.searchText */
         .get(this.urlFilm + this.searchText) /* richiesta effettuata all'indirizzo ottenuto da 'urlFilm' + 'la query' digitata dall'utente */
       
         // risposta
@@ -204,12 +284,63 @@ export default {
       } else {
         return flagLanguage
       }
+    },
+    callBase(){
+
+      //imposto chiamata axios per i film del mio slider
+      axios
+        // richiesta
+        /* this.urlFilm + this.searchText */
+        .get(this.urlFilm + 'red') /* richiesta effettuata all'indirizzo ottenuto da 'urlFilm' + 'la query'  */
+      
+        // risposta
+        .then(response => {
+          /* eseguo i console log di verifica per i valori corrispondenti */
+          /* console.log(this);
+          console.log(response); */
+
+          //assegno i dati ottenuti in risposta dal server
+          this.sliders = response.data.results
+      })
+      .catch(error => {
+        console.log(error);
+      })
     }
   },
   /* richiamo la chiamata api in mounted in modo che rimanga nella cache */
   mounted(){
-            this.callApi(); 
-        },
+          this.callBase(), 
+          new Swiper(this.$refs.swiper, {
+      // configure Swiper to use modules
+      modules: [Navigation, Pagination],
+      // Optional parameters
+      loop: true,
+      slidesPerView:6,
+      spaceBetween:15,
+      slidesPerGroup:6,
+      loopFillGroupWithBlank:true,
+
+      // If we need pagination
+      pagination: {
+        el: '.swiper-pagination',
+        clickable:true
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+
+      // And if we need scrollbar
+      scrollbar: {
+        el: '.swiper-scrollbar',
+      },
+    })
+
+        }
+  
+        
 }
 </script>
 
@@ -254,15 +385,112 @@ export default {
 
   main{
     max-height: calc(100vh - 70px);
+    position:relative;
 
-    .container{
+
+    .hero{
+      background-image: url('./assets/img/casa_di_carta.jpg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      height: 750px;
+      
+    }
+
+    .hero_info{
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0) 80%);
+      .hero_text{
+        margin-top: 0;
+        margin-bottom: 1rem;
+        color: white;
+        font-size: 1.3rem;
+        width: 50%;
+
+        button{
+          font-size: 1.1rem;
+          font-weight: 600;
+          .icon_hero_play,
+          .icon_hero_info{
+            font-size: 1.5rem;
+          }  
+        }
+      }
+    }
+
+    .swiper{
+      position:absolute;
+      top:500px;
+    }
+
+    .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 50%);
+    cursor:pointer;
+    .icon_slide_play{
+      font-size:3.5rem;
+      color:crimson;
+      display:none;
+    }
+    
+    }
+
+   .swiper-slide:hover img{
+    filter: grayscale(0.85);
+   }
+
+   .swiper-slide:hover .icon_slide_play{
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   }
+
+  
+       
+      position:relative;
+      .navigator{
+        position: absolute;
+        top: 40%;
+        width: 100%;
+        padding: 0px 4px;
+        .swiper-button-prev,
+        .swiper-button-next {
+          background-color: rgba(20,20,20,.5);
+          padding: 2.2rem;
+          cursor: pointer;
+          margin: 0 5px;
+          width: 45px;
+          color: white;
+          height:398px;
+          cursor:pointer;
+        }
+        .swiper-button-next {
+        right: 5px;
+        left: auto;
+        position: absolute;
+        top: -159px;
+        }
+        .swiper-button-prev{
+          left: -20px;
+          position: absolute;
+          top: -159px;
+        }
+      }
+
+    
+    
+    .container.search_results{
+      padding-top:10rem;
       .row{
         .col{
           .card{
             position:relative;
             box-shadow: 0 2px 4px 0 rgb(0 0 0 / 50%);
-
-            
 
             .card-img-top{
               /* width: 342px; */
@@ -278,6 +506,7 @@ export default {
               display:none;
               max-height: 298px;
               min-height: 298px;
+              aspect-ratio: 1 / 1;
               background-color:rgba(0, 0, 0, 0.900);
               color:white;
               overflow: auto;
